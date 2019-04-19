@@ -381,7 +381,7 @@ func (s *Service) LastLogEntry(ctx context.Context, k []byte) ([]byte, time.Time
 func (s *Service) firstLogEntry(ctx context.Context, tx Tx, k []byte) ([]byte, time.Time, error) {
 	bounds, err := s.getKeyValueLogBounds(ctx, tx, k)
 	if err != nil {
-		return nil, bounds.StartTime(), err
+		return nil, time.Time{}, err
 	}
 
 	return s.getLogEntry(ctx, tx, k, bounds.StartTime())
@@ -390,7 +390,7 @@ func (s *Service) firstLogEntry(ctx context.Context, tx Tx, k []byte) ([]byte, t
 func (s *Service) lastLogEntry(ctx context.Context, tx Tx, k []byte) ([]byte, time.Time, error) {
 	bounds, err := s.getKeyValueLogBounds(ctx, tx, k)
 	if err != nil {
-		return nil, bounds.StopTime(), err
+		return nil, time.Time{}, err
 	}
 
 	return s.getLogEntry(ctx, tx, k, bounds.StopTime())
