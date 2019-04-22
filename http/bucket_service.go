@@ -129,6 +129,7 @@ type bucket struct {
 	ID                  influxdb.ID     `json:"id,omitempty"`
 	OrganizationID      influxdb.ID     `json:"organizationID,omitempty"`
 	Organization        string          `json:"organization,omitempty"`
+	Description         string          `json:"description,omitempty"`
 	Name                string          `json:"name"`
 	RetentionPolicyName string          `json:"rp,omitempty"` // This to support v1 sources
 	RetentionRules      []retentionRule `json:"retentionRules"`
@@ -162,6 +163,7 @@ func (b *bucket) toInfluxDB() (*influxdb.Bucket, error) {
 		ID:                  b.ID,
 		OrganizationID:      b.OrganizationID,
 		Organization:        b.Organization,
+		Description:         b.Description,
 		Name:                b.Name,
 		RetentionPolicyName: b.RetentionPolicyName,
 		RetentionPeriod:     d,
@@ -187,6 +189,7 @@ func newBucket(pb *influxdb.Bucket) *bucket {
 		OrganizationID:      pb.OrganizationID,
 		Organization:        pb.Organization,
 		Name:                pb.Name,
+		Description:         pb.Description,
 		RetentionPolicyName: pb.RetentionPolicyName,
 		RetentionRules:      rules,
 	}
@@ -195,6 +198,7 @@ func newBucket(pb *influxdb.Bucket) *bucket {
 // bucketUpdate is used for serialization/deserialization with retention rules.
 type bucketUpdate struct {
 	Name           *string         `json:"name,omitempty"`
+	Description    *string         `json:"description,omitempty"`
 	RetentionRules []retentionRule `json:"retentionRules,omitempty"`
 }
 
@@ -217,6 +221,7 @@ func (b *bucketUpdate) toInfluxDB() (*influxdb.BucketUpdate, error) {
 
 	return &influxdb.BucketUpdate{
 		Name:            b.Name,
+		Description:     b.Description,
 		RetentionPeriod: &d,
 	}, nil
 }
@@ -228,6 +233,7 @@ func newBucketUpdate(pb *influxdb.BucketUpdate) *bucketUpdate {
 
 	up := &bucketUpdate{
 		Name:           pb.Name,
+		Description:    pb.Description,
 		RetentionRules: []retentionRule{},
 	}
 
