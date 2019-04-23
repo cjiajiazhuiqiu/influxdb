@@ -13,11 +13,17 @@ export const ALL_ACCESS_PERMISSIONS = [
   },
   {
     action: Permission.ActionEnum.Read,
-    resource: {type: PermissionResource.TypeEnum.Buckets},
+    resource: {
+      type: PermissionResource.TypeEnum.Buckets,
+      orgID: '03bdda404ef4e000',
+    },
   },
   {
     action: Permission.ActionEnum.Write,
-    resource: {type: PermissionResource.TypeEnum.Buckets},
+    resource: {
+      type: PermissionResource.TypeEnum.Buckets,
+      orgID: '03bdda404ef4e000',
+    },
   },
   {
     action: Permission.ActionEnum.Read,
@@ -27,6 +33,17 @@ export const ALL_ACCESS_PERMISSIONS = [
     action: Permission.ActionEnum.Write,
     resource: {type: PermissionResource.TypeEnum.Dashboards},
   },
+  {
+    action: Permission.ActionEnum.Read,
+    resource: {
+      type: PermissionResource.TypeEnum.Orgs,
+      id: '03bdda404ef4e000',
+    },
+  },
+  // {
+  //   action: Permission.ActionEnum.Write,
+  //   resource: {type: PermissionResource.TypeEnum.Orgs},
+  // },
   {
     action: Permission.ActionEnum.Read,
     resource: {type: PermissionResource.TypeEnum.Sources},
